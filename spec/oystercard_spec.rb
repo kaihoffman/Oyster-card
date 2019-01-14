@@ -1,7 +1,12 @@
 require 'oystercard'
 
 describe Oystercard do
-
+  describe '#balance' do
+    before(:each) do
+      basicoyster = subject.new
+      fulloyster = subject.new.top_up(90)
+    end
+  end
   it 'returns the current balance' do
     expect(subject.balance).to eq (0)
   end
@@ -19,8 +24,7 @@ describe Oystercard do
   end
 
   it 'returns an error when topping up if balance will exceed £90' do
-    subject.top_up(90)
-    expect {subject.top_up(1)}.to raise_error 'Unable to top-up, balance can not exceed £90'
+    expect {subject.top_up(90 + 1)}.to raise_error 'Unable to top-up, balance can not exceed £90'
   end
 
 end
