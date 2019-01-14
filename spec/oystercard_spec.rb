@@ -18,4 +18,9 @@ describe Oystercard do
     # allow(mocked_balance).to receive(subject.top_up(5)).and_return(5)
   end
 
+  it 'returns an error when topping up if balance will exceed £90' do
+    subject.top_up(90)
+    expect {subject.top_up(1)}.to raise_error 'Unable to top-up, balance can not exceed £90'
+  end
+
 end
