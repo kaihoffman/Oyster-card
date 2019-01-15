@@ -44,4 +44,10 @@ describe Oystercard do
       expect(subject).to respond_to(:in_journey?)
     end
   end
+
+  describe '#touch_in' do
+    it 'can respond to touch_in' do
+      expect(subject).to respond_to(:touch_in)
+    end
+  end
 end

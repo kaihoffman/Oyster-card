@@ -20,6 +20,10 @@ class Oystercard
 
   end
 
+  def touch_in
+
+  end
+
 private
   def oystercard_full?(amount)
     @balance + amount > MAX_VALUE
