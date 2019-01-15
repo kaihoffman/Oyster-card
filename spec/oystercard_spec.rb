@@ -51,14 +51,20 @@ describe Oystercard do
   end
 
   describe '#touch_in' do
+    let (:station) {double teststation}
     it 'changes in_use status to true when called' do
       subject.top_up(10)
-      subject.touch_in
+      subject.touch_in(:station)
       expect(subject.in_use).to eq(true)
     end
     it 'checks use has minimum balance for a single journey' do
       emptyoyster = described_class.new
-      expect {emptyoyster.touch_in}.to raise_error 'Insufficient funds'
+      expect { emptyoyster.touch_in(:station) }.to raise_error 'Insufficient funds'
+    end
+    it 'should store station of entry in an entry_station variable' do
+      subject.top_up(10)
+      subject.touch_in(:station)
+      expect(subject.entry_station).to eq(:station)
     end
   end
 
@@ -68,13 +74,13 @@ describe Oystercard do
     end
     it 'changes in_use status to false when called' do
       subject.top_up(10)
-      subject.touch_in
+      subject.touch_in(:station)
       subject.touch_out
       expect(subject.in_use).to eq(false)
     end
     it 'deducts minimum charge on touch_out' do
       subject.top_up(10)
-      subject.touch_in
+      subject.touch_in(:station)
       subject.touch_out
       expect {subject.touch_out}.to change{subject.balance}.by (Oystercard::MIN_JOURNEY_VALUE * -1)
     end
