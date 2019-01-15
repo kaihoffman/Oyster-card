@@ -84,5 +84,11 @@ describe Oystercard do
       subject.touch_out
       expect {subject.touch_out}.to change{subject.balance}.by (Oystercard::MIN_JOURNEY_VALUE * -1)
     end
+    it 'should empty out entry_station variable back to nil on touch_out' do
+      subject.top_up(10)
+      subject.touch_in(:station)
+      subject.touch_out
+      expect(subject.entry_station).to eq(nil)
+    end
+    end
   end
-end
