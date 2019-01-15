@@ -29,15 +29,17 @@ describe Oystercard do
     end
   end
 
-  describe '#deduct' do
-    it 'can respond to deduct method' do
-      expect(subject).to respond_to(:deduct).with(1)
-    end
-    it 'can deduct from balance' do
-      subject.top_up(10)
-      expect(subject.deduct(5)).to eq 5
-    end
-  end
+# #Deduct is now private
+#   describe '#deduct' do
+#     it 'can respond to deduct method' do
+#       expect(subject).to respond_to(:deduct).with(1)
+#     end
+#     it 'can deduct from balance' do
+#       subject.top_up(10)
+#       expect(subject.deduct(5)).to eq 5
+#     end
+#
+#   end
 
   describe '#in_journey?' do
     it 'can respond to query about journey status' do
@@ -69,6 +71,12 @@ describe Oystercard do
       subject.touch_in
       subject.touch_out
       expect(subject.in_use).to eq(false)
+    end
+    it 'deducts minimum charge on touch_out' do
+      subject.top_up(10)
+      subject.touch_in
+      subject.touch_out
+      expect {subject.touch_out}.to change{subject.balance}.by (Oystercard::MIN_JOURNEY_VALUE * -1)
     end
   end
 end
