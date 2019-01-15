@@ -94,5 +94,11 @@ describe Oystercard do
       subject.touch_out(:exitstation)
       expect(subject.exit_station).to eq(:exitstation)
     end
+    it 'should enter station information to @journeys on touch_out' do
+      subject.top_up(10)
+      subject.touch_in(:station)
+      subject.touch_out(:exitstation)
+      expect(subject.journeys).to include({:station => :exitstation})
+    end
     end
   end
