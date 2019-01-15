@@ -43,6 +43,9 @@ describe Oystercard do
     it 'can respond to query about journey status' do
       expect(subject).to respond_to(:in_journey?)
     end
+    it 'a newly created card should start as out of journey' do
+      expect(subject.in_use).to eq(false)
+    end
   end
 
   describe '#touch_in' do
