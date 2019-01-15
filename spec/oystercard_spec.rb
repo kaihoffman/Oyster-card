@@ -46,16 +46,16 @@ describe Oystercard do
       expect(subject).to respond_to(:in_journey?)
     end
     it 'a newly created card should start as out of journey' do
-      expect(subject.in_use).to eq(false)
+      expect(subject.in_journey?).to eq(false)
     end
   end
 
   describe '#touch_in' do
     let (:station) {double teststation}
-    it 'changes in_use status to true when called' do
+    it 'changes in_journey status to true when called' do
       subject.top_up(10)
       subject.touch_in(:station)
-      expect(subject.in_use).to eq(true)
+      expect(subject.in_journey?).to eq(true)
     end
     it 'checks use has minimum balance for a single journey' do
       emptyoyster = described_class.new
@@ -72,11 +72,11 @@ describe Oystercard do
     it 'can respond to touch_out' do
       expect(subject).to respond_to(:touch_out)
     end
-    it 'changes in_use status to false when called' do
+    it 'changes in_journey status to false when called' do
       subject.top_up(10)
       subject.touch_in(:station)
       subject.touch_out
-      expect(subject.in_use).to eq(false)
+      expect(subject.in_journey?).to eq(false)
     end
     it 'deducts minimum charge on touch_out' do
       subject.top_up(10)
