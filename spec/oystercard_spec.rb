@@ -62,5 +62,10 @@ describe Oystercard do
     it 'can respond to touch_out' do
       expect(subject).to respond_to(:touch_out)
     end
+    it 'changes in_use status to false when called' do
+      subject.touch_in
+      subject.touch_out
+      expect(subject.in_use).to eq(false)
+    end
   end
 end
