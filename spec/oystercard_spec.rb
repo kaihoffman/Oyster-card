@@ -69,26 +69,30 @@ describe Oystercard do
   end
 
   describe '#touch_out' do
-    it 'can respond to touch_out' do
-      expect(subject).to respond_to(:touch_out)
-    end
+    let (:exitstation) {double exitstation}
     it 'changes in_journey status to false when called' do
       subject.top_up(10)
       subject.touch_in(:station)
-      subject.touch_out
+      subject.touch_out(:exitstation)
       expect(subject.in_journey?).to eq(false)
     end
     it 'deducts minimum charge on touch_out' do
       subject.top_up(10)
       subject.touch_in(:station)
-      subject.touch_out
-      expect {subject.touch_out}.to change{subject.balance}.by (Oystercard::MIN_JOURNEY_VALUE * -1)
+      subject.touch_out(:exitstation)
+      expect {subject.touch_out(:exitstation)}.to change{subject.balance}.by (Oystercard::MIN_JOURNEY_VALUE * -1)
     end
     it 'should empty out entry_station variable back to nil on touch_out' do
       subject.top_up(10)
       subject.touch_in(:station)
-      subject.touch_out
+      subject.touch_out(:exitstation)
       expect(subject.entry_station).to eq(nil)
+    end
+    it 'should accept an exit station on touch_out' do
+      subject.top_up(10)
+      subject.touch_in(:station)
+      subject.touch_out(:exitstation)
+      expect(subject.exit_station).to eq(:exitstation)
     end
     end
   end
