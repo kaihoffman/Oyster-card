@@ -24,6 +24,10 @@ class Oystercard
 
   end
 
+  def touch_out
+
+  end
+
 private
   def oystercard_full?(amount)
     @balance + amount > MAX_VALUE

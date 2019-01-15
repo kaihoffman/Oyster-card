@@ -50,4 +50,10 @@ describe Oystercard do
       expect(subject).to respond_to(:touch_in)
     end
   end
+
+  describe '#touch_out' do
+    it 'can respond to touch_out' do
+      expect(subject).to respond_to(:touch_out)
+    end
+  end
 end
