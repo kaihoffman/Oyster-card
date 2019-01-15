@@ -49,12 +49,14 @@ describe Oystercard do
   end
 
   describe '#touch_in' do
-    it 'can respond to touch_in' do
-      expect(subject).to respond_to(:touch_in)
-    end
     it 'changes in_use status to true when called' do
+      subject.top_up(10)
       subject.touch_in
       expect(subject.in_use).to eq(true)
+    end
+    it 'checks use has minimum balance for a single journey' do
+      emptyoyster = described_class.new
+      expect {emptyoyster.touch_in}.to raise_error 'Insufficient funds'
     end
   end
 
@@ -63,6 +65,7 @@ describe Oystercard do
       expect(subject).to respond_to(:touch_out)
     end
     it 'changes in_use status to false when called' do
+      subject.top_up(10)
       subject.touch_in
       subject.touch_out
       expect(subject.in_use).to eq(false)
