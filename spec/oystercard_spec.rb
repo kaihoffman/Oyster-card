@@ -28,4 +28,20 @@ describe Oystercard do
       expect {subject.top_up(described_class::MAX_VALUE + 1)}.to raise_error "Unable to top-up, balance can not exceed £#{described_class::MAX_VALUE}"
     end
   end
+
+  describe '#deduct' do
+    it 'can respond to deduct method' do
+      expect(subject).to respond_to(:deduct).with(1)
+    end
+    it 'can deduct from balance' do
+      subject.top_up(10)
+      expect(subject.deduct(5)).to eq 5
+    end
+  end
+
+  describe '#in_journey?' do
+    it 'can respond to query about journey status' do
+      expect(subject).to respond_to(:in_journey?)
+    end
+  end
 end
