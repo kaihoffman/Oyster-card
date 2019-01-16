@@ -29,24 +29,9 @@ describe Oystercard do
     end
   end
 
-# #Deduct is now private
-#   describe '#deduct' do
-#     it 'can respond to deduct method' do
-#       expect(subject).to respond_to(:deduct).with(1)
-#     end
-#     it 'can deduct from balance' do
-#       subject.top_up(10)
-#       expect(subject.deduct(5)).to eq 5
-#     end
-#
-#   end
-
   describe '#in_journey?' do
     it 'can respond to query about journey status' do
       expect(subject).to respond_to(:in_journey?)
-    end
-    it 'a newly created card should start as out of journey' do
-      expect(subject.in_journey?).to eq(false)
     end
   end
 
