@@ -29,17 +29,13 @@ class Oystercard
   def touch_out(exit_station)
     deduct(MIN_JOURNEY_VALUE)
     @exit_station = exit_station
-    @journeys << { @entry_station => @exit_station }
-    @entry_station = nil
-
+    store_journeys
   end
-
 
 private
   def oystercard_full?(amount)
     @balance + amount > MAX_VALUE
   end
-
 
   def insufficient_funds?
     @balance < MIN_JOURNEY_VALUE
@@ -47,5 +43,10 @@ private
 
   def deduct(amount)
     @balance -= amount
+  end
+
+  def store_journeys
+    @journeys << { @entry_station => @exit_station }
+    @entry_station = nil
   end
 end
