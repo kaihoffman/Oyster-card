@@ -13,7 +13,7 @@ class Oystercard
   end
 
   def top_up(amount)
-    fail "Unable to top-up, balance can not exceed £#{MAX_VALUE}" if oystercard_full?(amount)
+    raise "Unable to top-up, balance can not exceed £#{MAX_VALUE}" if oystercard_full?(amount)
 
     @balance += amount
   end
