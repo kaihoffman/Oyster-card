@@ -1,13 +1,11 @@
 class Oystercard
   MAX_VALUE = 90
   MIN_JOURNEY_VALUE = 1
-  attr_reader :balance, :entry_station, :exit_station
+  attr_reader :balance
   attr_accessor :journeys
 
   def initialize
     @balance = 0
-    @entry_station = nil
-    @exit_station = nil
     @journeys = []
   end
 
@@ -18,27 +16,18 @@ class Oystercard
   end
 
   def in_journey?
-    @entry_station != nil
+    @journeys.last[:out] == nil
   end
 
   def touch_in(entry_station)
     fail "Insufficient funds" if insufficient_funds?
-    # @journeys.store(entry_station, nil)
-    @entry_station = entry_station
-    @journeys << { @entry_station => nil }
+    current_journey = {:in => entry_station }
+    @journeys << current_journey
     end
 
   def touch_out(exit_station)
     deduct(MIN_JOURNEY_VALUE)
-    @journeys.each do |hash|
-      if hash.key?(@entry_station)
-        hash[@entry_station] = exit_station
-      end
-    end
-    # @journeys << { self.keys.last => exit_station }
-    # @journeys.store(@journeys.keys.last, exit_station)
-    #@exit_station = exit_station
-    #store_journeys
+    @journeys.last[:out] = exit_station
   end
 
 private
@@ -54,10 +43,6 @@ private
     @balance -= amount
   end
 
-  # def store_journeys
-  #   @journeys << { @entry_station => @exit_station }
-  #   @entry_station = nil
-  # end
 end
 
 
