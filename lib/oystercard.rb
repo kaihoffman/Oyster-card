@@ -2,10 +2,11 @@ require_relative 'journey'
 
 # responsible for managing journeys and balance
 class Oystercard
-  MAX_VALUE = 90
-  MIN_JOURNEY_VALUE = 1
+
   attr_reader :balance
   attr_accessor :journeys
+
+  MAX_VALUE = 90
 
   def initialize
     @balance = 0
