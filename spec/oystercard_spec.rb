@@ -53,12 +53,13 @@ describe Oystercard do
     it 'should store station of entry in an entry_station hash' do
       subject.top_up(10)
       subject.touch_in(:station)
-      expect(subject.journeys.last[:in]).to eq(:station)
+      expect(subject.journeys.last.entry_station).to eq(:station)
     end
   end
 
   describe '#touch_out' do
     let (:exitstation) {double exitstation}
+    let (:journey) { double journey }
     it 'changes in_journey status to false when called' do
       subject.top_up(10)
       subject.touch_in(:station)
@@ -75,13 +76,13 @@ describe Oystercard do
       subject.top_up(10)
       subject.touch_in(:station)
       subject.touch_out(:exitstation)
-      expect(subject.journeys.last[:out]).to eq(:exitstation)
+      expect(subject.journeys.last.exit_station).to eq(:exitstation)
     end
     it 'should enter station information to @journeys on touch_out' do
       subject.top_up(10)
-      subject.touch_in(:station)
+      journey = subject.touch_in(:station)
       subject.touch_out(:exitstation)
-      expect(subject.journeys).to include({:in => :station, :out => :exitstation})
+      expect(subject.journeys.last).to eq(journey)
     end
     end
   end

@@ -1,3 +1,5 @@
+require_relative 'journey'
+
 class Oystercard
   MAX_VALUE = 90
   MIN_JOURNEY_VALUE = 1
@@ -16,18 +18,18 @@ class Oystercard
   end
 
   def in_journey?
-    @journeys.last[:out] == nil
+    @journeys.last.exit_station == ""
   end
 
   def touch_in(entry_station)
     fail "Insufficient funds" if insufficient_funds?
-    current_journey = {:in => entry_station }
+    current_journey = Journey.new({:in => entry_station })
     @journeys << current_journey
     end
 
   def touch_out(exit_station)
     deduct(MIN_JOURNEY_VALUE)
-    @journeys.last[:out] = exit_station
+    @journeys.last.exit_station = exit_station
   end
 
 private
@@ -44,7 +46,3 @@ private
   end
 
 end
-
-
-
-# card.journeys[0][card.journeys[0].keys] = "firstexitstation"
