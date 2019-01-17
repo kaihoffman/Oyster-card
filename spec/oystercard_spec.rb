@@ -78,6 +78,5 @@ describe Oystercard do
       subject.touch_out(:exitstation)
       expect(subject.journeys.last.exit_station).to eq(:exitstation)
     end
-
     end
   end
