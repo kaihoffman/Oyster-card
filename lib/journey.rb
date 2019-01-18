@@ -18,6 +18,10 @@ class Journey
     penalty ? PENALTY_FARE : MINIMUM_FARE
   end
 
+  def complete?
+    @exit_station != ''
+  end
+
   private
 
   def missed_entry_station?

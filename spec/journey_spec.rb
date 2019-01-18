@@ -30,5 +30,18 @@ describe Journey do
     expect(journey.fare).to eq(Journey::MINIMUM_FARE)
   end
 
+  context 'awareness of journey completion' do
+    it 'should only mark journeys as complete when there is an exit station' do
+      expect(journey.complete?).to be true
+    end
+
+    it 'should mark journeys as incomplete where exit station is missing' do
+      no_exit_journey = Journey.new(in: 'Paddington')
+      expect(no_exit_journey.complete?).to be false
+    end
+
+
+  end
+
 
 end

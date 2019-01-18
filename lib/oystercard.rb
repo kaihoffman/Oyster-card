@@ -19,7 +19,7 @@ class Oystercard
   end
 
   def in_journey?
-    @journeys.last.exit_station == ''
+    !@journeys.last.complete?
   end
 
   def touch_in(entry_station)
