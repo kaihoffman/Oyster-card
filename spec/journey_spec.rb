@@ -16,18 +16,18 @@ describe Journey do
 
     it 'levies a penalty fare when user forgets to touch out' do
       no_entry_journey = Journey.new(out: 'Aldgate')
-      expect(no_entry_journey.calculate_fare).to eq(Journey::PENALTY_FARE)
+      expect(no_entry_journey.fare).to eq(Journey::PENALTY_FARE)
     end
 
     it 'levies a penalty fare when user forgets to touch in' do
       no_exit_journey = Journey.new(in: 'Paddington')
-      expect(no_exit_journey.calculate_fare).to eq(Journey::PENALTY_FARE)
+      expect(no_exit_journey.fare).to eq(Journey::PENALTY_FARE)
     end
 
   end
 
   it 'should charge the minimum fare if no penalty' do
-    expect(journey.calculate_fare).to eq(Journey::MINIMUM_FARE)
+    expect(journey.fare).to eq(Journey::MINIMUM_FARE)
   end
 
 

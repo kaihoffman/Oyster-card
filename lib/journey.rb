@@ -12,11 +12,10 @@ class Journey
     @exit_station = args[:out] || empty_station
   end
 
-  def calculate_fare
+  def fare
     penalty = missed_entry_station? || missed_exit_station?
 
     penalty ? PENALTY_FARE : MINIMUM_FARE
-
   end
 
   private
