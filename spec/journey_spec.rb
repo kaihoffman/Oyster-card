@@ -40,7 +40,6 @@ describe Journey do
       expect(no_exit_journey.complete?).to be false
     end
 
-
   end
 
 

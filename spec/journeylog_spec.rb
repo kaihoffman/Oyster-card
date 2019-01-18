@@ -1,10 +1,16 @@
 require 'journeylog'
 
-describe 'JourneyLog' do
+describe JourneyLog do
 
-  subject(:journey) { double(journey) }
+  subject(:journeylog) { described_class.new(:journey)}
+  let(:journey) { double('journey') }
+  let(:oystercard) { double(:oystercard) }
 
   context 'it should start a journey' do
+
+    it 'should handle a touch out' do
+
+    end
 
   end
 
@@ -13,7 +19,9 @@ describe 'JourneyLog' do
   end
 
   context 'it should return a list of journeys' do
+    it 'should return a list of journeys' do
 
+    end
   end
 
 

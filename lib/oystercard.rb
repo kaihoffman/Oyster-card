@@ -1,5 +1,6 @@
 require_relative 'journey'
 
+
 # responsible for managing journeys and balance
 class Oystercard
 
@@ -7,10 +8,12 @@ class Oystercard
   attr_accessor :journeys
 
   MAX_VALUE = 90
+  MIN_JOURNEY_VALUE = 1
 
-  def initialize
+  def initialize(journey_log = JourneyLog.new(Journey))
     @balance = 0
-    @journeys = []
+    @journeys = journey_log
+
   end
 
   def top_up(amount)
@@ -20,7 +23,7 @@ class Oystercard
   end
 
   def in_journey?
-    !@journeys.last.complete?
+    !@journeys.complete?
   end
 
   def touch_in(entry_station)

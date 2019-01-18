@@ -55,11 +55,12 @@ describe Oystercard do
       subject.touch_in(:station)
       expect(subject.journeys.last.entry_station).to eq(:station)
     end
+
   end
 
   describe '#touch_out' do
-    let (:exitstation) {double exitstation}
-    let (:journey) { double journey }
+    let(:exitstation) {double exitstation}
+    let(:journey) { double journey }
     it 'changes in_journey status to false when called' do
       subject.top_up(10)
       subject.touch_in(:station)
